@@ -112,3 +112,30 @@ startButton.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     switchMode('pomodoro');
 });
+
+let link = 'https://api.giphy.com/v1/gifs/translate?api_key=L3Veo01o4BtRp703ZBUE1s66gqpyTxbg&s=cat';
+
+const img = document.querySelector('.icon');
+const changeGif = document.querySelector('.changeGif')
+
+async function fetchGif() {
+    try {
+        const response = await fetch(link, {mode: 'cors'});
+        const data = await response.json();
+        img.src = data.data.images.original.url;
+    } catch {
+        alert('Failed to find a gif')
+    }  
+};
+
+const askUser = () => {
+    wantedGif = String(prompt('Search for new type of gif: '));
+    link = `https://api.giphy.com/v1/gifs/translate?api_key=L3Veo01o4BtRp703ZBUE1s66gqpyTxbg&s=${wantedGif}`;
+    fetchGif();
+}
+
+img.addEventListener('click', () => {
+    fetchGif();
+})
+
+changeGif.addEventListener('click', askUser)
