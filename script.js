@@ -8,6 +8,7 @@ const timer = {
     long: 15,
     short: 5,
     sessions: 0,
+    elapsed: 0,
     longBreakInterval: 3,
 };
 
@@ -39,6 +40,8 @@ const startTimer = () => {
     interval = setInterval(() => {
         timer.remainingTime = getRemainingTime(endTime);
         updateClock();
+        if (timer.mode === 'pomodoro') timer.elapsed++;
+        console.log(timer.elapsed)
         if (timer.remainingTime.total <= 0) {
             clearInterval(interval);
 
@@ -65,7 +68,7 @@ const updateClock = () => {
     const seconds = `${remainingTime.seconds}`.padStart(2, 0);
 
     min.textContent = minutes;
-    sec.textContent = seconds;
+    sec.textContent = seconds;  
 }
 
 const switchMode = (mode) => {
@@ -130,12 +133,11 @@ async function fetchGif() {
 
 const askUser = () => {
     wantedGif = String(prompt('Search for new type of gif: '));
+    if (!wantedGif) return
     link = `https://api.giphy.com/v1/gifs/translate?api_key=L3Veo01o4BtRp703ZBUE1s66gqpyTxbg&s=${wantedGif}`;
     fetchGif();
 }
 
-img.addEventListener('click', () => {
-    fetchGif();
-})
+img.addEventListener('click', fetchGif)
 
 changeGif.addEventListener('click', askUser)

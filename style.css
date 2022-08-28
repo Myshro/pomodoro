@@ -22,11 +22,16 @@ body {
     justify-content: center;
     font-size: 18rem;
     margin-top: 0px;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .button-container {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 0px;
 }
 
 button {
@@ -67,18 +72,22 @@ button:hover {
 .header {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: right;
     align-items: center;
-    width: 90%;
+    width: 850px;
     background-color: white;
-    padding: 20px 500px;
+    padding: 20px 0px;
     text-align: center;
+    gap: 40px;
+    border-bottom: 3px solid #33332d;
+    margin: 0;
 }
 
 .changeGif {
     font-size: 0rem;
     color: red;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .header > a, .header > div {
@@ -96,8 +105,36 @@ button:hover {
     cursor: pointer;
 }
 
-.bar {
-    width: 50%;
-    height: 0px;
-    border-bottom: 3px solid #33332d;
+.active {
+    background-color: #33332d;
+    color: white;
+}
+
+@media (max-width: 900px) {
+    .button-container {
+        flex-direction: column;
+        gap: 40px;
+        width: 400px;
+        margin: 0 auto;
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+        align-items: center;
+        width: 60%;
+        background-color: white;
+        padding: 20px 0px;
+        text-align: center;
+        gap: 120px;
+        border-bottom: 3px solid #33332d;
+        margin: 0;
+    }
+
+    .digits {
+        font-size: 12rem;
+    }
+
+
 }
